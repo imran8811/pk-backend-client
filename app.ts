@@ -1,6 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
-var cors = require('cors');
+// var cors = require('cors');
 const mongoose3 = require('mongoose');
 var bodyParser = require('body-parser');
 // mongoose3.connect('mongodb+srv://imran8811:K%21ller%21%40%23@pkapparel.6x7jk.mongodb.net/pkapparel?retryWrites=true&w=majority&ssl=true', {useNewUrlParser: true, useUnifiedTopology: true});
@@ -24,12 +24,12 @@ var cartRouter = require('./routes/cart.routes.ts');
 
 var app = express();
 
-const corsOptions ={
-  origin:'http://localhost:4200', 
-  credentials:true,
-  optionSuccessStatus:200
-}
-app.use(cors(corsOptions));
+// const corsOptions ={
+//   origin: 'http://localhost:4200', 
+//   credentials: true,
+//   optionSuccessStatus: 200
+// }
+// app.use(cors(corsOptions));
 
 
 // view engine setup
