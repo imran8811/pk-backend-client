@@ -1,6 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
-// var cors = require('cors');
+var cors = require('cors');
 const mongoose3 = require('mongoose');
 var bodyParser = require('body-parser');
 // mongoose3.connect('mongodb+srv://imran8811:K%21ller%21%40%23@pkapparel.6x7jk.mongodb.net/pkapparel?retryWrites=true&w=majority&ssl=true', {useNewUrlParser: true, useUnifiedTopology: true});
@@ -24,13 +24,16 @@ var cartRouter = require('./routes/cart.routes.ts');
 
 var app = express();
 
-// const corsOptions ={
-//   origin: 'http://localhost:4200', 
-//   credentials: true,
-//   optionSuccessStatus: 200
-// }
-// app.use(cors(corsOptions));
+app.use(cors());
 
+//CORS middleware
+var allowCrossDomain = function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+}
+
+app.use(allowCrossDomain);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -69,6 +72,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(process.env.PORT || 5000)
+app.listen(process.env.PORT || 3000)
 
 module.exports = app;
