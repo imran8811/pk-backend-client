@@ -15,6 +15,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var app = express();
+app.use(cors());
 
 //CORS middleware
 var allowCrossDomain = function(req, res, next) {
