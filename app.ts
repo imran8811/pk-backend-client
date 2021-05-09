@@ -24,8 +24,13 @@ var cartRouter = require('./routes/cart.routes.ts');
 
 var app = express();
 
-app.use(cors({credentials: true, origin: true}));
-app.options('*', cors({credentials: true, origin: true}));
+app.use(cors());
+app.options('*', cors());
+app.all('/*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
 
 
 // view engine setup
