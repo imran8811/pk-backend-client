@@ -14,17 +14,7 @@ db.once('open', function() {
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-var indexRouter = require('./routes/index.routes.ts');
-var usersRouter = require('./routes/users.routes.ts');
-// var loginRouter = require('./routes/login.routes.ts');
-// var signupRouter = require('./routes/signup.routes.ts');
-var productRouter = require('./routes/product.routes.ts');
-var cartRouter = require('./routes/cart.routes.ts');
-
 var app = express();
-
-app.use(cors());
 
 //CORS middleware
 var allowCrossDomain = function(req, res, next) {
@@ -34,6 +24,13 @@ var allowCrossDomain = function(req, res, next) {
 }
 
 app.use(allowCrossDomain);
+
+var indexRouter = require('./routes/index.routes.ts');
+var usersRouter = require('./routes/users.routes.ts');
+// var loginRouter = require('./routes/login.routes.ts');
+// var signupRouter = require('./routes/signup.routes.ts');
+var productRouter = require('./routes/product.routes.ts');
+var cartRouter = require('./routes/cart.routes.ts');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
