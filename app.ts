@@ -3,7 +3,6 @@ var express = require('express');
 var cors = require('cors');
 const mongoose3 = require('mongoose');
 var bodyParser = require('body-parser');
-// mongoose3.connect('mongodb+srv://imran8811:K%21ller%21%40%23@pkapparel.6x7jk.mongodb.net/pkapparel?retryWrites=true&w=majority&ssl=true', {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose3.connect('mongodb://imran8811:K%21ller%21%40%23@pkapparel-shard-00-00.6x7jk.mongodb.net:27017,pkapparel-shard-00-01.6x7jk.mongodb.net:27017,pkapparel-shard-00-02.6x7jk.mongodb.net:27017/pkapparel?ssl=true&replicaSet=atlas-jmz7e0-shard-0&authSource=admin&retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 
 const db = mongoose3.connection;
@@ -16,28 +15,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var app = express();
 app.use(cors());
-
-//CORS middleware
-// var allowCrossDomain = function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
-// }
-
-// app.use(allowCrossDomain);
-
-// app.all('*', function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "X-Requested-With");
-//   res.header('Access-Control-Allow-Headers', 'Content-Type');
-//   next();
-// });
-
-app.use(cors({
-  'origin': '*',
-  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  'preflightContinue': false
-}));
 
 var indexRouter = require('./routes/index.routes.ts');
 var usersRouter = require('./routes/users.routes.ts');
