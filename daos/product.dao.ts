@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+const mongooseProduct = require('mongoose');
 
 const productModelDAO = require('../models/product.model.ts');
 
@@ -9,6 +9,6 @@ productModelDAO.statics = {
   }
 }
 
-const productDAO = mongoose.model('product', productModelDAO);
+const productDAO = mongooseProduct.model('product', productModelDAO);
 
 module.exports = productDAO;

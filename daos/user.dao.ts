@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+const mongooseUser = require('mongoose');
 
 const userModelDAO = require('../models/user.model.ts');
 
@@ -29,6 +29,6 @@ userModelDAO.statics = {
   }
 }
 
-const userDAO = mongoose.model('users', userModelDAO);
+const userDAO = mongooseUser.model('users', userModelDAO);
 
 module.exports = userDAO;

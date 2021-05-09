@@ -17,8 +17,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index.routes.ts');
 var usersRouter = require('./routes/users.routes.ts');
-var loginRouter = require('./routes/login.routes.ts');
-var signupRouter = require('./routes/signup.routes.ts');
+// var loginRouter = require('./routes/login.routes.ts');
+// var signupRouter = require('./routes/signup.routes.ts');
 var productRouter = require('./routes/product.routes.ts');
 var cartRouter = require('./routes/cart.routes.ts');
 
@@ -39,8 +39,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 //routes
 app.use('/api', indexRouter);
 app.use('/api/user', usersRouter);
-app.use('/api/login', loginRouter);
-app.use('/api/signup', signupRouter);
+// app.use('/api/login', loginRouter);
+// app.use('/api/signup', signupRouter);
 app.use('/api/product', productRouter);
 app.use('/api/cart', cartRouter);
 

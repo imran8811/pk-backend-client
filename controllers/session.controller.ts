@@ -1,5 +1,5 @@
 var bcrypt = require('bcryptjs');
-const sessionDAOCont = require('../daos/user.dao.ts');
+const sessionDAOCont = require('../daos/session.dao.ts');
 
 exports.create = (req, res) => {
   if( !req.body.userEmail || !req.body.userPassword || !req.body.fullName || !req.body.businessName ){

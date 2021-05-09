@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+const mongooseSession = require('mongoose');
 
 const sessionModelDAO = require('../models/session.model.ts');
 
@@ -29,6 +29,6 @@ sessionModelDAO.statics = {
   }
 }
 
-const sessionDAO = mongoose.model('sessions', sessionModelDAO);
+const sessionDAO = mongooseSession.model('sessions', sessionModelDAO);
 
 module.exports = sessionDAO;

@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+const mongooseCart = require('mongoose');
 
 const cartModelDAO = require('../models/cart.model.ts');
 
@@ -25,6 +25,6 @@ cartModelDAO.statics = {
   },
 }
 
-const cartDAO = mongoose.model('cart', cartModelDAO);
+const cartDAO = mongooseCart.model('cart', cartModelDAO);
 
 module.exports = cartDAO;
