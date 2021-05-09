@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./app.ts",
+    "start": "nodemon ./app.ts",
     "dev": "nodemon ./app.ts"
   },
   "dependencies": {
