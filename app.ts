@@ -1,11 +1,14 @@
 var createError = require('http-errors');
 var express = require('express');
 var cors = require('cors');
-const mongoose3 = require('mongoose');
+var mongooseConnect = require('mongoose');
 var bodyParser = require('body-parser');
-mongoose3.connect('mongodb://imran8811:K%21ller%21%40%23@pkapparel-shard-00-00.6x7jk.mongodb.net:27017,pkapparel-shard-00-01.6x7jk.mongodb.net:27017,pkapparel-shard-00-02.6x7jk.mongodb.net:27017/pkapparel?ssl=true&replicaSet=atlas-jmz7e0-shard-0&authSource=admin&retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+var multer = require('multer');
+var upload = multer({dest: 'uploads/'})
 
-const db = mongoose3.connection;
+mongooseConnect.connect('mongodb://imran8811:K%21ller%21%40%23@pkapparel-shard-00-00.6x7jk.mongodb.net:27017,pkapparel-shard-00-01.6x7jk.mongodb.net:27017,pkapparel-shard-00-02.6x7jk.mongodb.net:27017/pkapparel?ssl=true&replicaSet=atlas-jmz7e0-shard-0&authSource=admin&retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+
+const db = mongooseConnect.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log('db connected');
@@ -14,22 +17,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var app = express();
-// app.use(cors());
-//CORS middleware
-var allowCrossDomain = function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-
-  next();
-}
-
-app.use(allowCrossDomain);
+app.use(cors());
 
 var indexRouter = require('./routes/index.routes.ts');
 var usersRouter = require('./routes/users.routes.ts');
-// var loginRouter = require('./routes/login.routes.ts');
-// var signupRouter = require('./routes/signup.routes.ts');
+var loginRouter = require('./routes/login.routes.ts');
+var signupRouter = require('./routes/signup.routes.ts');
 var productRouter = require('./routes/product.routes.ts');
 var cartRouter = require('./routes/cart.routes.ts');
 
@@ -43,11 +36,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.post('/product/photo/upload', upload.single('avatar'), function(req, res, next){
+  
+})
+
 //routes
 app.use('/api', indexRouter);
 app.use('/api/user', usersRouter);
-// app.use('/api/login', loginRouter);
-// app.use('/api/signup', signupRouter);
+app.use('/api/login', loginRouter);
+app.use('/api/signup', signupRouter);
 app.use('/api/product', productRouter);
 app.use('/api/cart', cartRouter);
 
