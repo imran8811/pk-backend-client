@@ -30,8 +30,8 @@ const productModel = new productMongoose.Schema ({
     type : String,
     required : true
   },
-  prices : {
-    type : [],
+  price : {
+    type : String,
     required : true,
   },
   fabricDetails : {
@@ -45,6 +45,14 @@ const productModel = new productMongoose.Schema ({
   description : {
     type : String,
     required : true,
+  },
+  sizes : {
+    type: [],
+    required: true
+  },
+  quantity : {
+    type: [],
+    required: true
   }
 })
 

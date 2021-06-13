@@ -7,10 +7,12 @@ exports.create = (req, res) => {
     !req.body.title || 
     !req.body.styleNo || 
     !req.body.color ||
-    !req.body.prices ||
+    !req.body.price ||
     !req.body.fabricDetails ||
     !req.body.washDetails ||
-    !req.body.description
+    !req.body.description ||
+    !req.body.sizes ||
+    !req.body.quantity
     ){
     return res.status(400).send({
       message : "All field are required"
@@ -22,10 +24,12 @@ exports.create = (req, res) => {
     title : req.body.title,
     styleNo : req.body.styleNo,
     color : req.body.color,
-    prices : req.body.prices,
+    price : req.body.price,
     fabricDetails : req.body.fabricDetails,
     washDetails : req.body.washDetails,
-    description : req.body.description
+    description : req.body.description,
+    sizes : req.body.sizes,
+    quantity : req.body.quantity
   })
 
   product.save()
@@ -46,42 +50,40 @@ exports.create = (req, res) => {
 }
 
 exports.findAll = (req, res) => {
-  const dept = req.query.dept;
-  const cat = req.query.cat;
-  productDAOCont.find({department : dept, category : cat})
-  .then((data)  => {
-    if (!data)
-      res.status(404).send({
-        type: 'error',
-        message : 'No Record Found'
-      });
-    else res.send(data);
-  })
-  .catch(err => {
-    res
-      .status(500)
-      .send({ 
-        type: "error",
-        message: err.message
-      });
-  });
+  productDAOCont.find()
+    .then((data) => {
+      if (!data)
+        res.status(404).send({
+          type: 'error',
+          message : 'No Record Found'
+        });
+      else res.send(data);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .send({ 
+          type: "error",
+          message: err.message
+        });
+    });
 }
 
 exports.findOne = (req, res) => {
-  productDAOCont.findOne({_id: req.params.id})
-  .then((data)  => {
-    if (!data)
-      res.status(404).send({
-        type: 'error',
-      });
-    else res.send(data);
-  })
-  .catch(err => {
-    res.status(500).send({ 
-      type: "error",
-      message: err.message
+  productDAOCont.findOne({styleNo: req.params.styleNo})
+    .then((data)  => {
+      if (!data)
+        res.status(404).send({
+          type: 'error',
+        });
+      else res.send(data);
     })
-  });
+    .catch(err => {
+      res.status(500).send({ 
+        type: "error",
+        message: err.message
+      })
+    });
 }
 
 exports.addToCart = (req, res) => {

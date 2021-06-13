@@ -6,7 +6,7 @@ productModelDAO.statics = {
   create : function(data, cb) {
     var product = new this(data);
     product.save(cb);
-  }
+  }  
 }
 
 const productDAO = mongooseProduct.model('product', productModelDAO);
